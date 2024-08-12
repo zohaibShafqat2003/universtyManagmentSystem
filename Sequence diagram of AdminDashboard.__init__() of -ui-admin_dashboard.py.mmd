@@ -1,0 +1,58 @@
+
+%%{init: {'theme':'forest'}}%%
+
+sequenceDiagram
+
+    Title Sequence diagram of AdminDashboard.__init__() of /ui/admin_dashboard.py
+
+    participant p1 as __init__()<br>:uiadmin_dashboard.py/AdminDashboard
+    participant p2 as ui<br>:uiadmin_dashboard_ui.py/Ui_MainWindow
+    participant p3 as ui<br>:uiadmin_dashboard_ui.py/admin_dashboard_ui.py
+    participant p4 as <br>:backendcourse_allocation.py/course_allocation.py
+    participant p5 as <br>:databasedb_connection.py/db_connection.py
+    participant p6 as <br>:backendadmin.py/admin.py
+    participant p7 as <br>:backendteacher_allocation.py/teacher_allocation.py
+    participant p8 as <br>:backendstudent_management.py/student_management.py
+
+
+	p1 ->>+ p2: 1: setupUi(self)
+	p2 ->>+ p3: 1.1: retranslateUi(MainWindow)
+	p3 -->>- p2: 1.1: return value
+	p2 -->>- p1: 1: return value
+	p1 ->>+ p1: 2: setup_connections()
+	p1 -->>- p1: 2: return value
+	p1 ->>+ p4: 3: populate_comboboxes(self.ui.Department_comboBox, self.<br>ui.Semester_comboBox)
+	p4 ->>+ p5: 3.1: get_db_connection()
+	p5 -->>- p4: 3.1: return value
+	p4 -->>- p1: 3: return value
+	p1 ->>+ p1: 4: display_admin_details()
+	p1 ->>+ p6: 4.1: fetch_admin_details(self.user_id)
+	p6 ->>+ p5: 4.1.1: get_db_connection()
+	p5 -->>- p6: 4.1.1: return value
+	p6 -->>- p1: 4.1: return value
+	p1 -->>- p1: 4: return value
+	p1 ->>+ p1: 5: populate_department_combobox()
+	p1 ->>+ p7: 5.1: fetch_departments()
+	p7 ->>+ p5: 5.1.1: get_db_connection()
+	p5 -->>- p7: 5.1.1: return value
+	p7 -->>- p1: 5.1: return value
+	p1 -->>- p1: 5: return value
+	p1 ->>+ p1: 6: populate_unregistered_department_combobox()
+	p1 ->>+ p7: 6.1: fetch_departments()
+	p7 ->>+ p5: 6.1.1: get_db_connection()
+	p5 -->>- p7: 6.1.1: return value
+	p7 -->>- p1: 6.1: return value
+	p1 -->>- p1: 6: return value
+	p1 ->>+ p1: 7: populate_gpa_department_combobox()
+	p1 ->>+ p7: 7.1: fetch_departments()
+	p7 ->>+ p5: 7.1.1: get_db_connection()
+	p5 -->>- p7: 7.1.1: return value
+	p7 -->>- p1: 7.1: return value
+	p1 -->>- p1: 7: return value
+	p1 ->>+ p1: 8: populate_semester_combobox(self.ui.semester_comboBox)
+	p1 ->>+ p8: 8.1: fetch_semesters()
+	p8 ->>+ p5: 8.1.1: get_db_connection()
+	p5 -->>- p8: 8.1.1: return value
+	p8 -->>- p1: 8.1: return value
+	p1 -->>- p1: 8: return value
+        
